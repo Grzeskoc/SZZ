@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="movie" required="true"/>
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+
+        <div class="movie-element">
+            <div class="movie-description">
+                <img src="#{cc.attrs.movie.imgPath}"/><br/>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="Tytuł" />
+                    <span>#{cc.attrs.movie.title}</span><br/>
+                    <h:outputLabel value="Kategoria" />
+                    <span>#{cc.attrs.movie.category}</span><br/>
+                    <h:outputLabel value="Opis" />
+                    <span>#{cc.attrs.movie.description}</span><br/>
+                    <h:outputLabel value="Długość" />
+                    <span>#{cc.attrs.movie.duration}</span><br/>
+                    <h:outputLabel value="Język" />
+                    <span>#{cc.attrs.movie.voiceLanguage}</span><br/>
+                    <h:outputLabel value="Data dodania" />
+                    <span>#{cc.attrs.movie.dateAdd}</span><br/>
+                    <h:outputLabel value="Ocena" />
+                    <span>#{cc.attrs.movie.globalRate}(Liczna głosów: #{cc.attrs.movie.rateAmount})</span><br/>
+                </h:panelGrid>
+            </div>
+            <div class="movie-video">
+                <embed type="video/quicktime" src="#{cc.attrs.movie.videoPath}" width="320" height="240" AutoStart="false"/>
+            </div>
+            <div class="movie-rate">
+                <h:form>
+                    <h:outputLabel value="Oceń ten film"/>
+                    <c:forEach begin="1" end="5" varStatus="index">
+                        <h:commandButton action="rate" value="#{index.index}">
+                            <f:param name="movieId" value="#{cc.attrs.movie.id}"/>
+                            <f:param name="rate" value="#{index.index}"/>
+                        </h:commandButton>
+                    </c:forEach>
+                </h:form>
+            </div>
+
+        </div>
+
+    </cc:implementation>
+</html>

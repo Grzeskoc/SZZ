@@ -1,0 +1,11 @@
+
+
+.movie-element {
+    border: black solid medium;
+}
+
+
+
+.movie-element div{
+    display: inline-block;
+}
